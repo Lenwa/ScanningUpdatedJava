@@ -1,0 +1,11 @@
+Destination: OMH
+Door Number: 16
+Weight: 250
+Piece Count: 2sk
+Shipper: Fairytale Dreamworks 
+Shipper Address: 456 Applejack Lane Kansas City, MO 66302 
+Consignee: Rainbow Unicorns
+Consignee Address: 123 Rainbow Road Davenport, IA 62220
+Hazmat: N/A
+Posion: N/A
+Food: N/A

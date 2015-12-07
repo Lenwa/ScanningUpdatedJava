@@ -1,0 +1,13 @@
+Destination: DVP
+Door Number: 106
+Weight: 150
+Piece Count: 1sk 45pc
+Shipper: Fairytale Dreamworks 
+Shipper Address: 456 Applejack Lane Kansas City, MO 66302 
+Consignee: Rainbow Unicorns
+Consignee Address: 123 Rainbow Road Davenport, IA 62220
+Hazmat: N/A
+Posion: N/A
+Food: N/A
+
+
