@@ -24,7 +24,6 @@ public class FreightUtil {
         
     }
     
-    
     public String[] setInfoArray(String pro){
         info = new String[11];
         proInfo = new File("Database\\" + pro + ".txt");
