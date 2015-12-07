@@ -178,14 +178,15 @@ public class Frame {
         
         public void actionPerformed(ActionEvent e){
             //to prevent multiple instances of docking
-            if(freight.isDocked() == false){
+            
+            if(freight.isDocked() == false && freight.isInOSD() == false){
                 freight.setDocked();
                 freightUtil.setLocationDocked(freight.getPro(), 
                         freight.getDoorNumber());
             }
             else{
                 JOptionPane.showMessageDialog(panel, "Freight has already been "
-                    + "docked");
+                    + "docked or is in OS&D");
             }
         }
     }

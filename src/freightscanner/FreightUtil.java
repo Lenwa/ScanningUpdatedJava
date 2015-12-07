@@ -47,7 +47,7 @@ public class FreightUtil {
     }
     
     public void setLocationLoaded(String pro, String trueTrailerNum, 
-            String trueDest, String trailerNumber){
+        String trueDest, String trailerNumber){
         Object input = JOptionPane.showInputDialog(null, "Scan trailer");
         input.toString();
         writeTrailer = null;
