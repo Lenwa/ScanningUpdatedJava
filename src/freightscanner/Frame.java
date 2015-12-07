@@ -30,8 +30,11 @@ public class Frame {
     private JLabel trailerDoor, trailerNumber;
     private Trailer trailer;
     private FreightUtil freightUtil;
+    private Border raisedetched = BorderFactory.createEtchedBorder
+                            (EtchedBorder.RAISED);
     private Border loweredetched = BorderFactory.createEtchedBorder
                                (EtchedBorder.LOWERED);
+    private Font buttonFont = new Font("Droid Serif", Font.BOLD, 30);
     private Font font = new Font("Droid Serif", Font.BOLD, 18);
     /**
      *
@@ -46,24 +49,23 @@ public class Frame {
         OSDB = new JButton("OS&D");
         dockB = new JButton("Dock");
         loadB = new JButton("Load");
-        Border raisedetched = BorderFactory.createEtchedBorder
-                            (EtchedBorder.RAISED);
+        
         //add listeners to buttons
         scanB.addActionListener(new Scan());
         scanB.setBorder(raisedetched);
-        scanB.setFont(font);
+        scanB.setFont(buttonFont);
         OSDB.addActionListener(new OSD());
-        OSDB.setFont(font);
+        OSDB.setFont(buttonFont);
         OSDB.setBorder(raisedetched);
         dockB.addActionListener(new DOCK());
-        dockB.setFont(font);
+        dockB.setFont(buttonFont);
         dockB.setBorder(raisedetched);
         loadB.addActionListener(new LOAD());
-        loadB.setFont(font);
+        loadB.setFont(buttonFont);
         loadB.setBorder(raisedetched);
         
         //JPanel
-        panel1.setBorder(loweredetched);
+        panel1.setBorder(raisedetched);
         panel.setBorder(raisedetched);
         panel.setLayout(new GridLayout(0,2));
         panel.setBackground(Color.orange);
@@ -71,11 +73,11 @@ public class Frame {
         
         //add buttons to panel1
         panel1.add(scanB);
-        panel1.add(Box.createHorizontalStrut(20));
+        panel1.add(Box.createHorizontalStrut(30));
         panel1.add(OSDB);
-        panel1.add(Box.createHorizontalStrut(20));
+        panel1.add(Box.createHorizontalStrut(30));
         panel1.add(dockB);
-        panel1.add(Box.createHorizontalStrut(20));
+        panel1.add(Box.createHorizontalStrut(30));
         panel1.add(loadB);
         
         //add componets to window
@@ -96,7 +98,7 @@ public class Frame {
      * sets the JLabels in the JLabel array and adds them to the left side panel
      */
     private void setLabels(){
-            loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+        loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
         trailerDoor = new JLabel("Freight is being loaded in: "
                         + trailer.getTrailerDoor());
         trailerNumber = new JLabel("Freight goes on " + 

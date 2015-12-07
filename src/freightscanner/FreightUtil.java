@@ -91,7 +91,7 @@ public class FreightUtil {
         try{
             writePro =  new BufferedWriter(new FileWriter
                     ("Database\\" + pro + ".txt", true));
-            writePro.write("Docked in STL " + doorNumber + "by " + badge);
+            writePro.write("Docked in STL " + doorNumber + "  by " + badge);
             writePro.newLine();
             writePro.flush();
             writePro.close();
