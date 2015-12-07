@@ -1,8 +1,5 @@
 package freightscanner;
 
-import java.io.File;
-import java.util.Scanner;
-
 
 /**
  *
@@ -15,6 +12,8 @@ public class Freight {
     private boolean docked = false;
     private boolean inOSD = false;
     private boolean isHazmat = false;
+    private boolean isPosion = false;
+    private boolean isFood = false;
     public Freight(){
         
     }
@@ -34,9 +33,9 @@ public class Freight {
     }
     
     /**
-     * sets the pro to whatever the string parameter is, nine numbers sometimes
+     * sets the pro to whatever the scan input is, nine numbers sometimes
      * with two letters at the beginning 
-     * @param pro 
+     * @param pro nine digit number that identifies a piece of freight 
      */
     public void setPro(String pro){
         this.pro = pro;
@@ -44,7 +43,7 @@ public class Freight {
     
     /**
      * get the pro of the freight 
-     * @return 
+     * @return pro, the main identifier of a piece of freight
      */
     public String getPro(){
         return pro;
@@ -154,7 +153,8 @@ public class Freight {
     }
     
     /**
-     *set freight in OS&D
+     * 
+     *set freight in OSD
      */
     public void setInOSD(){
         this.inOSD = true;
@@ -162,7 +162,7 @@ public class Freight {
     
     /**
      *
-     * @return check and see if freight has been placed in OS&D
+     * @return check and see if freight has been placed in OSD
      */
     public boolean isInOSD(){
         return inOSD;

@@ -24,6 +24,7 @@ public class FreightUtil {
         
     }
     
+    
     public String[] setInfoArray(String pro){
         info = new String[11];
         proInfo = new File("Database\\" + pro + ".txt");
@@ -52,11 +53,12 @@ public class FreightUtil {
         input.toString();
         writeTrailer = null;
         writePro = null;
-        if(input.equals(trueTrailerNum)) {            
+        if(input.equals(trueTrailerNum)) {
+            Object badge = JOptionPane.showInputDialog(null, "Scan Badge");
             try {
                 writeTrailer = new BufferedWriter(new FileWriter
                             ("Database\\Lanes\\"+ trueDest + ".txt", true));
-                writeTrailer.write(pro);
+                writeTrailer.write(pro + " by " + badge);
                 writeTrailer.newLine();
                 writeTrailer.flush();
                 writeTrailer.close();
@@ -68,7 +70,7 @@ public class FreightUtil {
             try{
                 writePro =  new BufferedWriter(new FileWriter
                         ("Database\\" + pro + ".txt", true));
-                writePro.write("Loaded on: " + trueTrailerNum);
+                writePro.write("Loaded on: " + trueTrailerNum + " by " + badge);
                 writePro.newLine();
                 writePro.flush();
                 writePro.close();
@@ -86,10 +88,11 @@ public class FreightUtil {
     
     public void setLocationDocked(String pro, String doorNumber){
         writePro = null;
+        Object badge = JOptionPane.showInputDialog(null, "Scan Badge");
         try{
             writePro =  new BufferedWriter(new FileWriter
                     ("Database\\" + pro + ".txt", true));
-            writePro.write("Docked in STL " + doorNumber);
+            writePro.write("Docked in STL " + doorNumber + "by " + badge);
             writePro.newLine();
             writePro.flush();
             writePro.close();
@@ -102,7 +105,6 @@ public class FreightUtil {
      /**
      * triggers if the pro scanned isn't on file
      * @param pro string taken from initial scan 
-     * @param badgeNumber supervisor scans badge 
      */
     public void proNotOnFile(String pro){
         Object input = JOptionPane.showInputDialog(null, "Supervisor must "
