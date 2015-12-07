@@ -1,14 +1,20 @@
 package freightscanner;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 /**
  *
@@ -18,12 +24,15 @@ public class Frame {
     private Freight freight;
     private JFrame window; 
     private JLabel[] label = new JLabel[12];
-    private JPanel panel, panel1;
+    private JPanel panel, panel1, background;
     private JButton scanB, loadB, dockB, OSDB;
     private String[] info;
     private JLabel trailerDoor, trailerNumber;
     private Trailer trailer;
     private FreightUtil freightUtil;
+    private Border loweredetched = BorderFactory.createEtchedBorder
+                               (EtchedBorder.LOWERED);
+    private Font font = new Font("Droid Serif", Font.BOLD, 18);
     /**
      *
      */
@@ -32,39 +41,52 @@ public class Frame {
         window = new JFrame();
         panel = new JPanel();
         panel1 = new JPanel();
+        background = new JPanel(new BorderLayout());
         scanB = new JButton("Scan");
         OSDB = new JButton("OS&D");
         dockB = new JButton("Dock");
         loadB = new JButton("Load");
-        
+        Border raisedetched = BorderFactory.createEtchedBorder
+                            (EtchedBorder.RAISED);
         //add listeners to buttons
         scanB.addActionListener(new Scan());
+        scanB.setBorder(raisedetched);
+        scanB.setFont(font);
         OSDB.addActionListener(new OSD());
+        OSDB.setFont(font);
+        OSDB.setBorder(raisedetched);
         dockB.addActionListener(new DOCK());
+        dockB.setFont(font);
+        dockB.setBorder(raisedetched);
         loadB.addActionListener(new LOAD());
+        loadB.setFont(font);
+        loadB.setBorder(raisedetched);
         
         //JPanel
-        panel.setSize(400, 400);
+        panel1.setBorder(loweredetched);
+        panel.setBorder(raisedetched);
         panel.setLayout(new GridLayout(0,2));
-        panel1.setSize(400, 400);
-        panel1.setLayout(new GridLayout(2,2));
         panel.setBackground(Color.orange);
         panel1.setBackground(Color.red);
         
         //add buttons to panel1
         panel1.add(scanB);
+        panel1.add(Box.createHorizontalStrut(20));
         panel1.add(OSDB);
+        panel1.add(Box.createHorizontalStrut(20));
         panel1.add(dockB);
+        panel1.add(Box.createHorizontalStrut(20));
         panel1.add(loadB);
         
         //add componets to window
-        window.setSize(1000, 400);
+        window.setSize(750, 400);
         window.setLocationRelativeTo(null);
         window.setTitle("Scanning");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(new GridLayout(1,2));
-        window.add(panel);
-        window.add(panel1);
+        background.add(panel1, BorderLayout.PAGE_START);
+        background.add(panel, BorderLayout.CENTER);
+        window.add(background);
+
 
         //set window visible
         window.setVisible(true);
@@ -74,16 +96,23 @@ public class Frame {
      * sets the JLabels in the JLabel array and adds them to the left side panel
      */
     private void setLabels(){
-        for(int i=0;i<info.length;i++){
-            label[i] = new JLabel(info[i]);
-            panel.add(label[i]);
-        }
+            loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
         trailerDoor = new JLabel("Freight is being loaded in: "
-                + trailer.getTrailerDoor());
+                        + trailer.getTrailerDoor());
         trailerNumber = new JLabel("Freight goes on " + 
-                trailer.getTrailerNumber());
+                        trailer.getTrailerNumber());
+        trailerDoor.setBorder(loweredetched);
+        trailerDoor.setFont(font);
+        trailerNumber.setBorder(loweredetched);
+        trailerNumber.setFont(font);
         panel.add(trailerDoor);
         panel.add(trailerNumber);
+        for(int i=0;i<info.length;i++){
+            label[i] = new JLabel(info[i]);
+            label[i].setBorder(loweredetched);
+            label[i].setFont(font);
+            panel.add(label[i]);
+        }
         panel.validate();
         panel.repaint();
     }
@@ -133,7 +162,7 @@ public class Frame {
     private class Scan implements ActionListener {        
         
         public void actionPerformed(ActionEvent e) {           
-            Object input1 = JOptionPane.showInputDialog(null, "Scan Freight");        
+            Object input1 = JOptionPane.showInputDialog(window, "Scan Freight");        
             String pro = input1.toString();
             freight = new Freight();
             trailer = new Trailer();
@@ -165,7 +194,7 @@ public class Frame {
                 freightUtil.setLocationOSD(freight.getPro());
             }
             else{
-                JOptionPane.showMessageDialog(panel, "Freight has been "
+                JOptionPane.showMessageDialog(window, "Freight has been "
                         + "put in OS&D already");
             }
         }
@@ -185,7 +214,7 @@ public class Frame {
                         freight.getDoorNumber());
             }
             else{
-                JOptionPane.showMessageDialog(panel, "Freight has already been "
+                JOptionPane.showMessageDialog(window, "Freight has already been "
                     + "docked or is in OS&D");
             }
         }

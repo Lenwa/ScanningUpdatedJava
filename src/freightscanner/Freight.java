@@ -14,9 +14,7 @@ public class Freight {
             shipperAddress, consignee, consigneeAddress, hazmat, posion, food;
     private boolean docked = false;
     private boolean inOSD = false;
-    private File proInfo;
-    private Scanner br;
-    
+    private boolean isHazmat = false;
     public Freight(){
         
     }
