@@ -30,6 +30,7 @@ public class Frame {
     private JLabel trailerDoor, trailerNumber;
     private Trailer trailer;
     private FreightUtil freightUtil;
+    private JPanel[] panels = new JPanel[12];
     private Border raisedetched = BorderFactory.createEtchedBorder
                             (EtchedBorder.RAISED);
     private Border loweredetched = BorderFactory.createEtchedBorder
@@ -44,6 +45,12 @@ public class Frame {
         window = new JFrame();
         panel = new JPanel();
         panel1 = new JPanel();
+        for(int i=0; i<panels.length; i++){
+            panels[i] = new JPanel();
+            panels[i].setBackground(Color.YELLOW);
+            panels[i].setBorder(loweredetched);
+            panel.add(panels[i]);
+        }
         background = new JPanel(new BorderLayout());
         scanB = new JButton("Scan");
         OSDB = new JButton("OS&D");
@@ -69,7 +76,7 @@ public class Frame {
         panel.setBorder(raisedetched);
         panel.setLayout(new GridLayout(0,2));
         panel.setBackground(Color.orange);
-        panel1.setBackground(Color.red);
+        panel1.setBackground(Color.BLUE);
         
         //add buttons to panel1
         panel1.add(scanB);
@@ -81,7 +88,7 @@ public class Frame {
         panel1.add(loadB);
         
         //add componets to window
-        window.setSize(750, 400);
+        window.setSize(1100, 400);
         window.setLocationRelativeTo(null);
         window.setTitle("Scanning");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,20 +110,23 @@ public class Frame {
                         + trailer.getTrailerDoor());
         trailerNumber = new JLabel("Freight goes on " + 
                         trailer.getTrailerNumber());
-        trailerDoor.setBorder(loweredetched);
         trailerDoor.setFont(font);
-        trailerNumber.setBorder(loweredetched);
+        trailerDoor.setForeground(Color.RED);
         trailerNumber.setFont(font);
-        panel.add(trailerDoor);
-        panel.add(trailerNumber);
-        for(int i=0;i<info.length;i++){
+        trailerNumber.setForeground(Color.RED);
+        panels[0].add(trailerDoor);
+        panels[0].repaint();
+        panels[0].revalidate();
+        panels[1].add(trailerNumber);
+        panels[1].repaint();
+        panels[1].revalidate();
+        for(int i=2;i<info.length;i++){
             label[i] = new JLabel(info[i]);
-            label[i].setBorder(loweredetched);
             label[i].setFont(font);
-            panel.add(label[i]);
+            panels[i].add(label[i]);
+            panels[i].validate();
+            panels[i].repaint();
         }
-        panel.validate();
-        panel.repaint();
     }
     
     /**
@@ -171,6 +181,7 @@ public class Frame {
             freightUtil = new FreightUtil();
             freight.setPro(pro);
             freight.setFreightInfo(freightUtil.setInfoArray(pro));
+            
             trailer.setTrailerInfo(freight.getDestination());
             setLabelInfo();
             //for the first time through otherwise nullpointerexceptions
