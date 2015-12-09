@@ -30,7 +30,7 @@ public class Frame {
     private JLabel trailerDoor, trailerNumber;
     private Trailer trailer;
     private FreightUtil freightUtil;
-    private JPanel[] panels = new JPanel[12];
+    private JPanel[] panels = new JPanel[13];
     private Border raisedetched = BorderFactory.createEtchedBorder
                             (EtchedBorder.RAISED);
     private Border loweredetched = BorderFactory.createEtchedBorder
@@ -105,7 +105,6 @@ public class Frame {
      * sets the JLabels in the JLabel array and adds them to the left side panel
      */
     private void setLabels(){
-        loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
         trailerDoor = new JLabel("Freight is being loaded in: "
                         + trailer.getTrailerDoor());
         trailerNumber = new JLabel("Freight goes on " + 
@@ -115,18 +114,21 @@ public class Frame {
         trailerNumber.setFont(font);
         trailerNumber.setForeground(Color.RED);
         panels[0].add(trailerDoor);
-        panels[0].repaint();
-        panels[0].revalidate();
         panels[1].add(trailerNumber);
-        panels[1].repaint();
-        panels[1].revalidate();
-        for(int i=2;i<info.length;i++){
+        for(int i=0;i<info.length;i++){
             label[i] = new JLabel(info[i]);
             label[i].setFont(font);
             panels[i].add(label[i]);
+        }
+        for(int i=2; i<panels.length; i++){
+            panels[i].add(label[i-2]);
             panels[i].validate();
             panels[i].repaint();
         }
+        panels[0].repaint();
+        panels[0].revalidate();
+        panels[1].repaint();
+        panels[1].revalidate();
     }
     
     /**
@@ -150,21 +152,23 @@ public class Frame {
     //removes JLabels from panel so new ones can be placed, was getting 
     //nullpointerexceptions when I used a for loop so typed out whole array
     private void removeLabels(){
-        panel.remove(label[0]);
-        panel.remove(label[1]);
-        panel.remove(label[2]);
-        panel.remove(label[3]);
-        panel.remove(label[4]);
-        panel.remove(label[5]);
-        panel.remove(label[6]);
-        panel.remove(label[7]);
-        panel.remove(label[8]);
-        panel.remove(label[9]);
-        panel.remove(label[10]);
-        panel.remove(trailerDoor);
-        panel.remove(trailerNumber);
-        panel.revalidate();
-        panel.repaint();
+        panels[2].remove(label[0]);
+        panels[3].remove(label[1]);
+        panels[4].remove(label[2]);
+        panels[5].remove(label[3]);
+        panels[6].remove(label[4]);
+        panels[7].remove(label[5]);
+        panels[8].remove(label[6]);
+        panels[9].remove(label[7]);
+        panels[10].remove(label[8]);
+        panels[11].remove(label[9]);
+        panels[12].remove(label[10]);
+        panels[0].remove(trailerDoor);
+        panels[1].remove(trailerNumber);
+        for(int i=0; i<panels.length;i++){
+            panels[i].revalidate();
+            panels[i].repaint();
+        }
     }
     
     /**
@@ -181,12 +185,12 @@ public class Frame {
             freightUtil = new FreightUtil();
             freight.setPro(pro);
             freight.setFreightInfo(freightUtil.setInfoArray(pro));
-            
-            trailer.setTrailerInfo(freight.getDestination());
             setLabelInfo();
+            trailer.setTrailerInfo(freight.getDestination());
             //for the first time through otherwise nullpointerexceptions
-            if(label[0] == null)
+            if(label[2] == null){
                 setLabels();
+            }
             else{
                 removeLabels();
                 setLabels();

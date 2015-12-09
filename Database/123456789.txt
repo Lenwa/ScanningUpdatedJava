@@ -10,3 +10,5 @@ Hazmat: N/A
 Posion: N/A
 Food: N/A
 Docked in STL Door Number: 106by 45849
+Docked in STL Door Number: 106  by 45849
+Held in STL OS&D  Authorized by:45849   Reason: 1. per CSR

@@ -1,3 +1,4 @@
 
 456789123  Authorized by: 45849   Reason: 3. no packing slip
 123456789  Authorized by: 45849   Reason: 0. HAZ error
+123456789  Authorized by: 45849   Reason: 1. per CSR
